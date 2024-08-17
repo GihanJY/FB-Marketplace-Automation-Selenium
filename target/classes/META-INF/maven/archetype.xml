@@ -1,0 +1,9 @@
+<archetype>
+  <id>web-test-project</id>
+  <sources>
+    <source>src/Main/java/App.java</source>
+  </sources>
+  <testSources>
+    <source>src/test/java/AppTest.java</source>
+  </testSources>
+</archetype>
