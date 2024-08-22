@@ -3,6 +3,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,6 +13,8 @@ public class Facebook {
 
     // Initialize the WebDriver and open the Facebook login page in a Chrome browser.
     public void openFacebook() {
+
+
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
@@ -27,12 +30,16 @@ public class Facebook {
     // Enter login credentials and click on the "login" button.
     public void loginFacebook() {
         try {
+            FacebookCredentials fbCred = new FacebookCredentials();
+            String email = fbCred.getUsername();
+            String password = fbCred.getPassword();
+
             Thread.sleep(2000);
-            driver.findElement(By.id("email")).sendKeys("0729418080");
+            driver.findElement(By.id("email")).sendKeys(email);
             printWithTime("Email entered successfully.");
 
             Thread.sleep(2000);
-            driver.findElement(By.id("pass")).sendKeys("Student@123");
+            driver.findElement(By.id("pass")).sendKeys(password);
             printWithTime("Password entered successfully.");
 
             Thread.sleep(2000);

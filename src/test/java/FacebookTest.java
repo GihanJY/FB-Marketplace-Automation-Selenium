@@ -32,8 +32,11 @@ public class FacebookTest {
         driver.manage().window().maximize();
 
         // Enter login credentials and click login button.
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email"))).sendKeys("0729418080");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("pass"))).sendKeys("Student@123");
+        FacebookCredentials fbCred = new FacebookCredentials();
+        String email = fbCred.getUsername();
+        String password = fbCred.getPassword();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email"))).sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("pass"))).sendKeys(password);
         wait.until(ExpectedConditions.elementToBeClickable(By.name("login"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Marketplace')]"))).click();
 
