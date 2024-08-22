@@ -1,14 +1,16 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 public class Facebook {
     public static WebDriver driver;
 
+    // Initialize the WebDriver and open the Facebook login page in a Chrome browser.
     public void openFacebook() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -22,6 +24,7 @@ public class Facebook {
         System.out.println("==========================================");
     }
 
+    // Enter login credentials and click on the "login" button.
     public void loginFacebook() {
         try {
             Thread.sleep(2000);
@@ -37,11 +40,11 @@ public class Facebook {
             printWithTime("Login button clicked successfully.");
         }
         catch (InterruptedException error) {
-            error.printStackTrace();
             System.out.println("An error occurred during Facebook login: " + error.getMessage());
         }
     }
 
+    // Navigate to the Facebook Marketplace page
     public void navigateMarketplace(){
         try{
             Thread.sleep(2000);
@@ -49,11 +52,11 @@ public class Facebook {
             printWithTime("Navigated to Facebook Marketplace successfully.");
         }
         catch (InterruptedException error){
-            error.printStackTrace();
             System.out.println("An error occurred while navigating to Marketplace: " + error.getMessage());
         }
     }
 
+    // Select each keyword from the array and call the searchItems() method with the web driver
     public void searchMarketPlace() {
         printWithTime("Searching items in Facebook Marketplace...");
 
@@ -77,25 +80,26 @@ public class Facebook {
         }
     }
 
+    // Search for the specified keyword in the Facebook Marketplace search bar.
     public void searchItems(String keyword, WebDriver webDriver){
         try {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                WebElement searchBar = webDriver.findElement(By.xpath("//div[@class='x6s0dn4 x78zum5 x1swvt13 x1pi30zi']//input[@placeholder='Search Marketplace']"));
-                searchBar.click();
-                searchBar.sendKeys(keyword);
-                searchBar.sendKeys(Keys.ENTER);
-                System.out.println("\t* Searched for item: " + keyword);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            WebElement searchBar = webDriver.findElement(By.xpath("//div[@class='x6s0dn4 x78zum5 x1swvt13 x1pi30zi']//input[@placeholder='Search Marketplace']"));
+            searchBar.click();
+            searchBar.sendKeys(keyword);
+            searchBar.sendKeys(Keys.ENTER);
+            System.out.println("\t* Searched for item: " + keyword);
         }
         catch(Exception error){
-            error.printStackTrace();
             System.out.println("An error occurred while searching items: " + error.getMessage());
         }
     }
 
+    //Logout from the Facebook
     public void logoutFacebook(){
         try {
             Thread.sleep(10000);
@@ -107,11 +111,11 @@ public class Facebook {
             printWithTime("Logged out of Facebook successfully.");
         }
         catch (InterruptedException error) {
-            error.printStackTrace();
             System.out.println("An error occurred during Facebook logout: " + error.getMessage());
         }
     }
 
+    // Close the browser and quit the WebDriver.
     public void closeFacebook() {
         try {
             Thread.sleep(2000);
@@ -121,11 +125,11 @@ public class Facebook {
             System.out.println("==========================================");
         }
         catch (Exception error){
-            error.printStackTrace();
             System.out.println("An error occurred while closing the browser: " + error.getMessage());
         }
     }
 
+    // Print messages to the console with a timestamp.
     private void printWithTime(String text){
         DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
         System.out.println(time.format(LocalDateTime.now()) + " - " + text);
