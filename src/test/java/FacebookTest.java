@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,7 +22,9 @@ public class FacebookTest {
     @Before
     public void makeObject(){
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://web.facebook.com/login.php?_rdc=1&_rdr");
         driver.manage().window().maximize();
@@ -33,7 +36,6 @@ public class FacebookTest {
 
         fb = new Facebook();
     }
-/*
 
     @Test
     @Order(1)
@@ -46,7 +48,6 @@ public class FacebookTest {
     public void validTest2(){
         fb.searchItems("Honda CBR", driver);
     }
-*/
 
     @Test
     @Order(3)
@@ -54,10 +55,10 @@ public class FacebookTest {
         fb.searchItems("@#$%^&*", driver);
         WebElement actualElement = driver.findElement(By.cssSelector("div[class='x1n2onr6 x1ja2u2z x78zum5 x2lah0s xl56j7k x6s0dn4 xozqiw3 x1q0g3np xi112ho x17zwfj4 x585lrc x1403ito x972fbf xcfux6l x1qhh985 xm0m39n x9f619 xn6708d x1ye3gou xtvsq51 x1r1pt67']"));
         boolean isElementPresent = actualElement.isDisplayed();
-        Assert.assertEquals(true, isElementPresent);
+        Assert.assertTrue(isElementPresent);
     }
 
-/*    @Test
+    @Test
     @Order(4)
     public void invalidTest2(){
         fb.searchItems("\"'; DROP DATABASE users;--\"", driver);
@@ -73,7 +74,7 @@ public class FacebookTest {
     @Order(6)
     public void edgeTest2(){
         fb.searchItems("IpHoNe", driver);
-    }*/
+    }
 
     @After
     public void finalMethod(){
