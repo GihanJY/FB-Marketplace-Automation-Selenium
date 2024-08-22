@@ -22,7 +22,7 @@
       <artifactId>webdrivermanager</artifactId>
       <version>5.9.2</version>
     </dependency>
-
+    
     <!-- Logback for SLF4J -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
